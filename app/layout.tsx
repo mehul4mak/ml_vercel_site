@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
+import CommandPalette from "@/components/CommandPalette";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,7 +51,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="bg-bg text-slate-100 antialiased noise">
+        <ScrollProgress />
         <Navbar />
+        <CommandPalette />
         <main>{children}</main>
         <Footer />
       </body>

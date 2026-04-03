@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import TypewriterText from "@/components/TypewriterText";
 
 export default function Hero() {
   return (
@@ -30,13 +31,8 @@ export default function Hero() {
             </h1>
           </div>
 
-          {/* Role */}
-          <div className="flex items-center gap-3">
-            <div className="h-px w-8 bg-gradient-to-r from-[#818cf8] to-[#22d3ee]" />
-            <p className="text-xl text-slate-300 font-medium">
-              Staff Software Engineer — AI/ML
-            </p>
-          </div>
+          {/* Role — typewriter */}
+          <TypewriterText />
 
           {/* Location */}
           <div className="flex items-center gap-2 text-slate-500 text-sm">

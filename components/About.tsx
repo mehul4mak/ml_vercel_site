@@ -1,9 +1,4 @@
-const stats = [
-  { value: "8+", label: "Years Experience" },
-  { value: "5", label: "Companies" },
-  { value: "2", label: "Countries" },
-  { value: "10+", label: "ML Projects" },
-];
+import AnimatedStats from "@/components/AnimatedStats";
 
 export default function About() {
   return (
@@ -53,15 +48,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="gradient-border p-6 text-center">
-                <p className="text-4xl font-bold gradient-text mb-1">{stat.value}</p>
-                <p className="text-slate-500 text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          {/* Stats — animated counters */}
+          <AnimatedStats />
         </div>
       </div>
     </section>

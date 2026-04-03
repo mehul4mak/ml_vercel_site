@@ -4,6 +4,25 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
+function CmdKHint() {
+  const [, setOpen] = useState(false);
+  return (
+    <button
+      onClick={() => window.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true }))}
+      className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 text-slate-500 text-xs hover:text-slate-300 hover:border-white/20 transition-all"
+    >
+      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      Search
+      <span className="flex items-center gap-0.5 ml-1">
+        <kbd className="px-1 rounded bg-white/10 text-[10px] font-mono">⌘</kbd>
+        <kbd className="px-1 rounded bg-white/10 text-[10px] font-mono">K</kbd>
+      </span>
+    </button>
+  );
+}
+
 const navLinks = [
   { href: "/projects", label: "Projects" },
   { href: "/experience", label: "Experience" },
@@ -43,6 +62,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
+          <CmdKHint />
           {navLinks.map((link) => (
             <Link
               key={link.href}
