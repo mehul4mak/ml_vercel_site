@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GitHubStats from "@/components/GitHubStats";
 
 export const metadata: Metadata = {
   title: "Projects — Mehul Kumawat",
@@ -143,6 +144,8 @@ export default function ProjectsPage() {
             </Link>
           ))}
         </div>
+
+        <GitHubStats />
       </div>
     </div>
   );

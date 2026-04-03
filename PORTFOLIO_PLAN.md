@@ -3,58 +3,47 @@
 **Repo:** `git@mak:mehul4mak/ml_vercel_site.git`
 **Local path:** `/home/mehul/portfolio`
 **Hosting:** Vercel (auto-deploys on push to `main`)
-**Stack:** Next.js 15 · Tailwind CSS · TypeScript · React 19
+**Stack:** Next.js 16 · Tailwind CSS · TypeScript · React 19
 
 ---
 
 ## Phase 1 — Foundation ✅ Done
 
-**Commit:** `d4d07f4`
-
-### What was built
-- [x] Migrated from Expo/React Native to Next.js 15 + Tailwind CSS
+- [x] Migrated from Expo/React Native to Next.js 16 + Tailwind CSS
 - [x] `app/layout.tsx` — Root layout with Inter font, SEO metadata, dark background
 - [x] `components/Navbar.tsx` — Fixed frosted-glass navbar, mobile hamburger menu, scroll-aware styling
 - [x] `app/page.tsx` — Home page combining Hero + About + Skills sections
-- [x] `components/Hero.tsx` — Profile photo (from mehul4mak.github.io), gradient name, role, bio, CTA buttons, social icons, floating badge, scroll indicator
-- [x] `components/About.tsx` — Bio paragraphs + 4 stat cards (6+ yrs, 3 companies, 2 countries, 10+ projects)
+- [x] `components/Hero.tsx` — Profile photo, gradient name, role, bio, CTA buttons, social icons, floating badge, scroll indicator
+- [x] `components/About.tsx` — Bio paragraphs + 4 stat cards (8+ yrs, 5 companies, 2 countries, 10+ projects)
 - [x] `components/Skills.tsx` — 6 skill groups with colored tag pills (CV, Sensor Fusion, LLMs, MLOps, Languages, Cloud)
 - [x] `components/Footer.tsx` — Links + built-with note
-- [x] `app/projects/page.tsx` — 8 project cards (1 live MNIST, 7 coming soon)
-- [x] `app/experience/page.tsx` — Full work timeline (Sentics → Stellantis Lead → Stellantis Senior → Hanover) + Education section
-- [x] `app/contact/page.tsx` — Contact info cards (email, LinkedIn, GitHub, phone)
 - [x] `app/globals.css` — Custom scrollbar, gradient-text utility, glassmorphism card styles, animations
-
-### Design system
-- **Background:** `#050507`
-- **Accent gradient:** `#818cf8` (indigo) → `#22d3ee` (cyan)
-- **Cards:** `rgba(255,255,255,0.03)` + `rgba(255,255,255,0.07)` border
-- **Font:** Inter (Google Fonts)
 
 ---
 
-## Phase 2 — Projects & Demos 🔲 Todo
+## Phase 2 — Projects & Demos ✅ Done
 
-> Branch: `phase-2-projects` (create when starting)
-
-- [ ] Port MNIST digit upload demo → `/projects/mnist` (from old Expo app)
-- [ ] Port MNIST drawing canvas demo → `/projects/mnist-draw`
-- [ ] Add individual project detail pages `/projects/[slug]`
-- [ ] Wire up a real contact form (Resend or Formspree for email delivery)
-- [ ] Add resume PDF to `public/resume.pdf` and update download button in Hero
-- [ ] Replace placeholder resume download link in `components/Hero.tsx`
+- [x] `app/experience/page.tsx` — Full 8-role timeline (Sentics → Stellantis Lead → Stellantis Senior → Hanover → Upgrad/Byjus → CADD Center); Sentics in 5 grouped sections, all roles with full resume detail
+- [x] `app/education/page.tsx` — Tabbed page: Education / Certifications / Languages
+- [x] `app/projects/page.tsx` — 8 project cards with Production / Live / Completed status badges
+- [x] `app/projects/[slug]/page.tsx` — Individual detail pages for all 8 projects
+- [x] `app/projects/mnist/page.tsx` — MNIST demo: Upload image + Draw canvas tabs; Classify button ready for backend
+- [x] `app/contact/page.tsx` — Contact form (Formspree) with name/email/message, success/error states + contact info cards
+- [x] `public/resume.pdf` — Resume PDF with working Hero download button
+- [x] `.gitignore` — node_modules, .next, .env excluded
+- [x] Next.js upgraded 15.1.0 → 16.2.2 (CVE-2025-66478 fix)
+- [x] Git author corrected to mehul4mak / mehul4mak@gmail.com across all commits
 
 ---
 
 ## Phase 3 — Polish 🔲 Todo
 
-- [ ] SEO: add `og:image` per page, sitemap, robots.txt
-- [ ] Add scroll-triggered fade-in animations (Intersection Observer)
-- [ ] GitHub activity / repo stats widget on projects page
-- [ ] Blog/notes section (optional — MDX-based)
-- [ ] Certifications section on Experience page (MLOps, Sensor Fusion, GenAI Nanodegrees)
 - [ ] Add `public/favicon.ico` and app icons
+- [ ] SEO: `og:image` per page, `sitemap.xml`, `robots.txt`
+- [ ] Scroll-triggered fade-in animations (Intersection Observer)
+- [ ] GitHub activity / repo stats widget on projects page
 - [ ] Performance audit (Lighthouse)
+- [ ] Blog/notes section — optional, MDX-based
 
 ---
 
@@ -63,17 +52,23 @@
 | File | Purpose |
 |------|---------|
 | `app/page.tsx` | Home page — imports Hero, About, Skills |
-| `components/Hero.tsx` | Hero section — update photo, bio, resume link here |
+| `components/Hero.tsx` | Hero section — photo, bio, resume link |
 | `components/Skills.tsx` | Skill tags — add/remove skills here |
-| `app/projects/page.tsx` | Projects grid — add new projects here |
-| `app/experience/page.tsx` | Work timeline — update roles here |
-| `app/contact/page.tsx` | Contact info |
+| `app/projects/page.tsx` | Projects grid |
+| `app/projects/[slug]/page.tsx` | Project detail pages |
+| `app/projects/mnist/page.tsx` | MNIST demo — wire backend here |
+| `app/experience/page.tsx` | Work timeline |
+| `app/education/page.tsx` | Education, certifications, languages |
+| `app/contact/page.tsx` | Contact form + info |
 | `app/globals.css` | Global styles + design tokens |
-| `tailwind.config.ts` | Tailwind theme (colors, animations) |
+| `tailwind.config.ts` | Tailwind theme |
 | `next.config.ts` | Next.js config (image domains, etc.) |
+| `vercel.json` | Vercel build config |
 
 ---
 
-## Resume
-Located at: `/mnt/c/Users/Asus/Downloads/Mehul_Kumawat_AI.pdf`
-Copy to `public/resume.pdf` to enable the download button in the Hero.
+## Notes
+
+- MNIST Classify button is disabled — wire up by setting the fetch URL in `app/projects/mnist/page.tsx` to your hosted backend endpoint
+- Formspree form ID is hardcoded in `app/contact/page.tsx` — replace if needed
+- Resume path: `public/resume.pdf`
