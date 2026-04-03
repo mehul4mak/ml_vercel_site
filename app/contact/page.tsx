@@ -1,11 +1,31 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact — Mehul Kumawat",
-  description: "Get in touch with Mehul Kumawat",
-};
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("https://formspree.io/f/xpwzddgb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <div className="min-h-screen pt-24 pb-20 px-6">
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
@@ -88,18 +108,75 @@ export default function ContactPage() {
           ))}
         </div>
 
-        {/* Contact form note */}
-        <div className="gradient-border p-6 text-center">
-          <p className="text-slate-400 text-sm mb-4">
-            Prefer email? Reach me directly at{" "}
-            <a href="mailto:mehulkumawat@icloud.com" className="text-[#818cf8] hover:text-[#22d3ee] transition-colors">
-              mehulkumawat@icloud.com
-            </a>{" "}
-            — I usually respond within 24 hours.
-          </p>
-          <p className="text-slate-600 text-xs">
-            Based in Wolfsburg, Germany · Open to remote opportunities worldwide
-          </p>
+        {/* Contact form */}
+        <div className="gradient-border p-6 sm:p-8">
+          <h2 className="text-white font-semibold text-lg mb-6">Send a Message</h2>
+
+          {status === "sent" ? (
+            <div className="text-center py-8">
+              <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p className="text-white font-semibold mb-1">Message sent!</p>
+              <p className="text-slate-500 text-sm">I&apos;ll get back to you within 24 hours.</p>
+              <button
+                onClick={() => setStatus("idle")}
+                className="mt-4 text-sm text-[#818cf8] hover:text-[#22d3ee] transition-colors"
+              >
+                Send another
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-400 text-xs font-medium mb-1.5">Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Your name"
+                    className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#818cf8]/50 focus:bg-white/[0.06] transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-400 text-xs font-medium mb-1.5">Email</label>
+                  <input
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="your@email.com"
+                    className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#818cf8]/50 focus:bg-white/[0.06] transition-all"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-slate-400 text-xs font-medium mb-1.5">Message</label>
+                <textarea
+                  required
+                  rows={5}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="What's on your mind?"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-[#818cf8]/50 focus:bg-white/[0.06] transition-all resize-none"
+                />
+              </div>
+              {status === "error" && (
+                <p className="text-red-400 text-xs">Something went wrong. Please email me directly.</p>
+              )}
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="w-full py-3 rounded-lg bg-gradient-to-r from-[#818cf8] to-[#22d3ee] text-white font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {status === "sending" ? "Sending…" : "Send Message"}
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>

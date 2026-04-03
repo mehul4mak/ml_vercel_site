@@ -64,7 +64,8 @@ export default function Hero() {
               View Projects
             </Link>
             <a
-              href="https://mehul4mak.github.io/assets/img/mehul_circle.png"
+              href="/resume.pdf"
+              download="Mehul_Kumawat_Resume.pdf"
               className="px-6 py-3 rounded-xl border border-white/10 bg-white/5 text-slate-200 font-semibold text-sm hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-[0.98] transition-all duration-200"
             >
               Download Resume

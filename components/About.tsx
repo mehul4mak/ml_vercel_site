@@ -1,6 +1,6 @@
 const stats = [
-  { value: "6+", label: "Years Experience" },
-  { value: "3", label: "Companies" },
+  { value: "8+", label: "Years Experience" },
+  { value: "5", label: "Companies" },
   { value: "2", label: "Countries" },
   { value: "10+", label: "ML Projects" },
 ];
@@ -28,7 +28,7 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-slate-400 leading-relaxed">
               <p>
-                I&apos;m a Software Engineer with 6+ years of experience turning research-grade AI
+                I&apos;m a Software Engineer with 8+ years of experience turning research-grade AI
                 into production systems that run at the edge. My journey started in automotive
                 engineering, evolved through data analytics, and landed deep in the world of
                 computer vision, sensor fusion, and large language models.
